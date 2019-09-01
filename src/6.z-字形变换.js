@@ -52,6 +52,28 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-    
-};
-
+    let n = 2 * (numRows - 2) + 2
+    let str = ""
+    if (numRows === 1) {
+        return s
+    }
+    for (let row = 0; row < numRows; row++) {
+        for (let i = 0; i < s.length; i++) {
+            if (row === 0 && i % n === 0) {
+                str += s[i]
+                continue
+            }
+            if (row === numRows - 1 && (i % (n) === numRows - 1)) {
+                str += s[i]
+                continue
+            }
+            if (row !== 0 && row !== numRows) {
+                if (i % n === row || (i + row) % n === 0) {
+                    str += s[i]
+                }
+            }
+        }
+    }
+    return str
+}
+// console.log(convert("LEETCODEISHIRING", 4))
