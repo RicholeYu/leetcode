@@ -59,15 +59,15 @@ var convert = function(s, numRows) {
     }
     for (let row = 0; row < numRows; row++) {
         for (let i = 0; i < s.length; i++) {
-            if (row === 0 && i % n === 0) {
-                str += s[i]
-                continue
-            }
-            if (row === numRows - 1 && (i % (n) === numRows - 1)) {
-                str += s[i]
-                continue
-            }
-            if (row !== 0 && row !== numRows) {
+            if (row === 0) {
+                if (i % n === 0) {
+                    str += s[i]
+                }
+            } else if (row === numRows - 1) {
+                if (i % n === numRows - 1) {
+                    str += s[i]
+                }
+            } else {
                 if (i % n === row || (i + row) % n === 0) {
                     str += s[i]
                 }
