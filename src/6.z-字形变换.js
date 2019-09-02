@@ -51,7 +51,9 @@
  * @param {number} numRows
  * @return {string}
  */
-var convert = function(s, numRows) {
+
+// 332ms 8.27% 63.64$
+var convert1 = function(s, numRows) {
     let n = 2 * (numRows - 2) + 2
     let str = ""
     if (numRows === 1) {
@@ -76,4 +78,26 @@ var convert = function(s, numRows) {
     }
     return str
 }
-// console.log(convert("LEETCODEISHIRING", 4))
+
+// 128ms 78.27% 26.67%
+var convert = function(s, numRows) {
+    let isDown = false
+    let rows = []
+    let index = 0
+    let row = 0
+    if (numRows === 1) {
+        return s
+    }
+    while (index < numRows) {
+        rows[index++] = []
+    }
+    for (index = 0; index < s.length; index ++) {
+        if (row === 0 || row === numRows - 1) {
+            isDown = !isDown
+        }
+        rows[row].push(s[index])
+        row += (isDown ? 1 : -1)
+    }
+    return rows.map(row => row.join("")).join("")
+}
+// console.log(convert1("LEETCODEISHIRING", 4))

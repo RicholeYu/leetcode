@@ -7,7 +7,7 @@
  * @param {string} s
  * @return {string}
  */
-// 暴力破解法
+// 暴力破解法 1844ms 5.02% 49.81%
 var longestPalindrome1 = function(s) {
 
     function isPalindrome (str) {
@@ -36,7 +36,7 @@ var longestPalindrome1 = function(s) {
 }
 // console.log(longestPalindrome("abcdbbfcba"))
 
-// 动态规划法
+// 动态规划法 692ms 21.8% 5.65%
 function longestPalindrome (string) {
     if (!string || string.length === 1) {
         return string
@@ -46,8 +46,7 @@ function longestPalindrome (string) {
     let str = string[0]
     let index = 0
     while (index < string.length) {
-        dp[index] = []
-        index++
+        dp[index++] = []
     }
     for (let r = 0; r <= string.length; r++) {
         for (let l = 0; l < r; l++) {
