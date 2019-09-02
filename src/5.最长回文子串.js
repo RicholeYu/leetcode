@@ -7,7 +7,20 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+// 暴力破解法
+var longestPalindrome1 = function(s) {
+
+    function isPalindrome (str) {
+        let start
+        let end
+        for (start = 0, end = str.length - 1; end > start; start++,end--) {
+            if (str[start] !== str[end]) {
+                return false
+            }
+        }
+        return true
+    }
+
     let len = 1
     let str = ""
     for (let i = 0; i < s.length; i++) {
@@ -22,14 +35,31 @@ var longestPalindrome = function(s) {
     return str
 }
 // console.log(longestPalindrome("abcdbbfcba"))
-function isPalindrome (str) {
-    let start
-    let end
-    for (start = 0, end = str.length - 1; end > start; start++,end--) {
-        if (str[start] !== str[end]) {
-            return false
+
+// 动态规划法
+function longestPalindrome (string) {
+    if (!string || string.length === 1) {
+        return string
+    }
+    let dp = []
+    let len = 1
+    let str = string[0]
+    let index = 0
+    while (index < string.length) {
+        dp[index] = []
+        index++
+    }
+    for (let r = 0; r <= string.length; r++) {
+        for (let l = 0; l < r; l++) {
+            if (string[l] === string[r] && (r - l <= 2 || dp[l + 1][r - 1])) {
+                dp[l][r] = true
+                if (r - l + 1 > len) {
+                    str = string.substr(l, r - l + 1)
+                    len = r - l
+                }
+            }
         }
     }
-    return true
+    return str
 }
 
