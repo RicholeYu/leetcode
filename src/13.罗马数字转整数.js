@@ -71,7 +71,29 @@
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function(s) {
-    
-};
-
+var romanToInt = function(string) {
+    let num = 0
+    let index = string.length - 1
+    let hash = {
+        CM: 900,
+        M: 1000,
+        CD: 400,
+        D: 500,
+        XC: 90,
+        C: 100,
+        XL: 40,
+        L: 50,
+        IX: 9,
+        X: 10,
+        IV: 4,
+        V: 5,
+        I: 1
+    }
+    while (index >= 0) {
+        let roman = string[index]
+        let roman1 = index === 0 ? "" : string.substr(index - 1, 2)
+        num += (hash[roman1] ? hash[roman1] : hash[roman])
+        index = hash[roman1] ? index - 2 : index - 1
+    }
+    return num
+}
